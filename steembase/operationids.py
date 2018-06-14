@@ -41,6 +41,10 @@ op_names = [
     'claim_reward_balance',
     'delegate_vesting_shares',
     'account_create_with_delegation',
+    'content_order_create',
+    'content_order_cancel',
+    'encrypted_content',
+    'private_message',
     'fill_convert_request',
     'author_reward',
     'curation_reward',
@@ -55,6 +59,8 @@ op_names = [
     'comment_payout_update',
     'return_vesting_delegation',
     'comment_benefactor_reward',
+    'producer_reward',
+    'smt_create',
 ]
 
 #: assign operation ids
