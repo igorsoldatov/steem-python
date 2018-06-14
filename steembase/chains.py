@@ -1,4 +1,4 @@
-default_prefix = "STM"
+default_prefix = "BMT"
 
 known_chains = {
     "STEEM": {

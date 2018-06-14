@@ -8,7 +8,7 @@ from steem.utils import compat_bytes
 log = logging.getLogger(__name__)
 
 """ Default Prefix """
-PREFIX = "STM"
+PREFIX = "BMT"
 
 known_prefixes = [
     PREFIX,

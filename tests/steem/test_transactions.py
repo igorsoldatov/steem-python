@@ -86,16 +86,16 @@ class Testcases(unittest.TestCase):
                 'json_metadata':
                 '',
                 'memo_key':
-                'STM6zLNtyFVToBsBZDsgMhgjpwysYVbsQD6YhP3kRkQhANUB4w7Qp',
+                'BMT6zLNtyFVToBsBZDsgMhgjpwysYVbsQD6YhP3kRkQhANUB4w7Qp',
                 'new_account_name':
                 'fsafaasf',
                 'owner': {
                     'account_auths': [],
                     'key_auths': [[
-                        'STM5jYVokmZHdEpwo5oCG3ES2Ca4VYz'
+                        'BMT5jYVokmZHdEpwo5oCG3ES2Ca4VYz'
                         'y6tM8pWWkGdgVnwo2mFLFq', 1
                     ], [
-                        'STM6zLNtyFVToBsBZDsgMhgjpwysYVb'
+                        'BMT6zLNtyFVToBsBZDsgMhgjpwysYVb'
                         'sQD6YhP3kRkQhANUB4w7Qp', 1
                     ]],
                     'weight_threshold':
@@ -104,10 +104,10 @@ class Testcases(unittest.TestCase):
                 'active': {
                     'account_auths': [],
                     'key_auths': [[
-                        'STM6pbVDAjRFiw6fkiKYCrkz7PFeL7'
+                        'BMT6pbVDAjRFiw6fkiKYCrkz7PFeL7'
                         'XNAfefrsREwg8MKpJ9VYV9x', 1
                     ], [
-                        'STM6zLNtyFVToBsBZDsgMhgjpwysYV'
+                        'BMT6zLNtyFVToBsBZDsgMhgjpwysYV'
                         'bsQD6YhP3kRkQhANUB4w7Qp', 1
                     ]],
                     'weight_threshold':
@@ -116,13 +116,13 @@ class Testcases(unittest.TestCase):
                 'posting': {
                     'account_auths': [],
                     'key_auths': [[
-                        'STM8CemMDjdUWSV5wKotEimhK6c4d'
+                        'BMT8CemMDjdUWSV5wKotEimhK6c4d'
                         'Y7p2PdzC2qM1HpAP8aLtZfE7', 1
                     ], [
-                        'STM6zLNtyFVToBsBZDsgMhgjpwys'
+                        'BMT6zLNtyFVToBsBZDsgMhgjpwys'
                         'YVbsQD6YhP3kRkQhANUB4w7Qp', 1
                     ], [
-                        'STM6pbVDAjRFiw6fkiKYCrkz7PFeL'
+                        'BMT6pbVDAjRFiw6fkiKYCrkz7PFeL'
                         '7XNAfefrsREwg8MKpJ9VYV9x', 1
                     ]],
                     'weight_threshold':
@@ -332,10 +332,10 @@ class Testcases(unittest.TestCase):
                     1,
                     "account_auths": [["xeroc", 1], ["fabian", 1]],
                     "key_auths": [[
-                        "STM6KChDK2sns9MwugxkoRvPEnyju"
+                        "BMT6KChDK2sns9MwugxkoRvPEnyju"
                         "TxHN5upGsZ1EtanCffqBVVX3", 1
                     ], [
-                        "STM7sw22HqsXbz7D2CmJfmMwt9ri"
+                        "BMT7sw22HqsXbz7D2CmJfmMwt9ri"
                         "mtk518dRzsR1f8Cgw52dQR1pR", 1
                     ]]
                 },
@@ -344,10 +344,10 @@ class Testcases(unittest.TestCase):
                     1,
                     "account_auths": [],
                     "key_auths": [[
-                        "STM7sw22HqsXbz7D2CmJfmMwt9r"
+                        "BMT7sw22HqsXbz7D2CmJfmMwt9r"
                         "imtk518dRzsR1f8Cgw52dQR1pR", 1
                     ], [
-                        "STM6KChDK2sns9MwugxkoRvPEn"
+                        "BMT6KChDK2sns9MwugxkoRvPEn"
                         "yjuTxHN5upGsZ1EtanCffqBVVX3", 1
                     ]]
                 },
@@ -356,15 +356,15 @@ class Testcases(unittest.TestCase):
                     2,
                     "account_auths": [],
                     "key_auths": [[
-                        "STM6KChDK2sns9MwugxkoRvPEnyju"
+                        "BMT6KChDK2sns9MwugxkoRvPEnyju"
                         "TxHN5upGsZ1EtanCffqBVVX3", 1
                     ], [
-                        "STM7sw22HqsXbz7D2CmJfmMwt9ri"
+                        "BMT7sw22HqsXbz7D2CmJfmMwt9ri"
                         "mtk518dRzsR1f8Cgw52dQR1pR", 1
                     ]]
                 },
                 "memo_key":
-                "STM728uLvStTeAkYJsQefks3FX8yfmpFHp8wXw3RY3kwey2JGDooR",
+                "BMT728uLvStTeAkYJsQefks3FX8yfmpFHp8wXw3RY3kwey2JGDooR",
                 "json_metadata":
                 ""
             })
@@ -687,7 +687,7 @@ class Testcases(unittest.TestCase):
                 "url":
                 "foooobar",
                 "block_signing_key":
-                "STM6zLNtyFVToBsBZDsgMhgjpwysYVbsQD6YhP3kRkQhANUB4w7Qp",
+                "BMT6zLNtyFVToBsBZDsgMhgjpwysYVbsQD6YhP3kRkQhANUB4w7Qp",
                 "props": {
                     "account_creation_fee": "10.000 STEEM",
                     "maximum_block_size": 1111111,

@@ -11,7 +11,7 @@ from .types import (Int16, Uint16, Uint32, Uint64, String, Bytes, Array,
                     PointInTime, Bool, Optional, Map, Id, JsonObj,
                     StaticVariant)
 
-default_prefix = "STM"
+default_prefix = "BMT"
 
 asset_precision = {
     "STEEM": 3,
@@ -672,7 +672,7 @@ class WitnessUpdate(GrapheneObject):
             if not kwargs["block_signing_key"]:
                 kwargs[
                     "block_signing_key"] = \
-                    "STM1111111111111111111111111111111114T1Anm"
+                    "BMT1111111111111111111111111111111114T1Anm"
             super(WitnessUpdate, self).__init__(
                 OrderedDict([
                     ('owner', String(kwargs["owner"])),

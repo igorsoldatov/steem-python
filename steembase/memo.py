@@ -12,7 +12,7 @@ from .base58 import base58encode, base58decode
 from .account import PrivateKey, PublicKey
 from steem.utils import compat_bytes
 
-default_prefix = "STM"
+default_prefix = "BMT"
 
 
 def get_shared_secret(priv, pub):

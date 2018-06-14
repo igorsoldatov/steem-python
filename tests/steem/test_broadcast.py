@@ -46,9 +46,9 @@ def test_witness_update():
     c = Commit(steemd_instance=Steemd(nodes=[]),
                keys=[wif])
 
-    signing_key = 'STM1111111111111111111111111111111114T1Anm'
+    signing_key = 'BMT1111111111111111111111111111111114T1Anm'
     props = {
-        'account_creation_fee': '0.500 STEEM',
+        'account_creation_fee': '0.500 BMT',
         'maximum_block_size': 65536,
         'sbd_interest_rate': 0}
 

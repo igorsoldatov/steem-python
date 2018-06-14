@@ -10,18 +10,18 @@
           "account_auths": [],
           "key_auths": [
             [
-              "STM8MN3FNBa8WbEpxz3wGL3L1mkt6sGnncH8iuto7r8Wa3T9NSSGT",
+              "BMT8MN3FNBa8WbEpxz3wGL3L1mkt6sGnncH8iuto7r8Wa3T9NSSGT",
               1
             ]
           ]
         },
-        "memo_key": "STM6Gkj27XMkoGsr4zwEvkjNhh4dykbXmPFzHhT8g86jWsqu3U38X",
+        "memo_key": "BMT6Gkj27XMkoGsr4zwEvkjNhh4dykbXmPFzHhT8g86jWsqu3U38X",
         "active": {
           "weight_threshold": 1,
           "account_auths": [],
           "key_auths": [
             [
-              "STM8HCf7QLUexogEviN8x1SpKRhFwg2sc8LrWuJqv7QsmWrua6ZyR",
+              "BMT8HCf7QLUexogEviN8x1SpKRhFwg2sc8LrWuJqv7QsmWrua6ZyR",
               1
             ]
           ]
@@ -32,14 +32,14 @@
           "account_auths": [],
           "key_auths": [
             [
-              "STM8EhGWcEuQ2pqCKkGHnbmcTNpWYZDjGTT7ketVBp4gUStDr2brz",
+              "BMT8EhGWcEuQ2pqCKkGHnbmcTNpWYZDjGTT7ketVBp4gUStDr2brz",
               1
             ]
           ]
         },
         "creator": "hello",
         "json_metadata": "{}",
-        "fee": "0.000 STEEM"
+        "fee": "0.000 BMT"
       }
     ]
   ],

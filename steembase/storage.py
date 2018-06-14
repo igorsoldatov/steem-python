@@ -203,7 +203,7 @@ class Configuration(DataDir):
         "limit": 10,
         "list_sorting": "trending",
         "post_category": "steem",
-        "prefix": "STM"
+        "prefix": "BMT"
     }
 
     def __init__(self):
