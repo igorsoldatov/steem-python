@@ -15,6 +15,13 @@ known_chains = {
         "sbd_symbol": "GBG",
         "vests_symbol": "GESTS",
     },
+    "BMT": {
+        "chain_id": "80de68d4692d36b89ee061bed56f0f77d89770b76953dd14391e46f273315a2f",
+        "prefix": "BMT",
+        "steem_symbol": "BMT",
+        "sbd_symbol": "BMT",
+        "vests_symbol": "REP",
+    },
     "TEST": {
         "chain_id":
             "9afbce9f2416520733bacb370315d32b6b2c43d6097576df1c1222859d91eecc",
