@@ -759,6 +759,27 @@ class CommentOptions(GrapheneObject):
                     ('extensions', extensions),
                 ]))
 
+class PrivateMessage(GrapheneObject):
+    def __init__(self, *args, **kwargs):
+        if isArgsThisClass(self, args):
+            self.data = args[0].data
+        else:
+            prefix = 'BMT'
+
+            if len(args) == 1 and len(kwargs) == 0:
+                kwargs = args[0]
+            super(PrivateMessage, self).__init__(
+                OrderedDict([
+                    ('from', String(kwargs["from"])),
+                    ('to', String(kwargs["to"])),
+                    ('from_memo_key', PublicKey(kwargs["from_memo_key"], prefix=prefix)),
+                    ('to_memo_key', PublicKey(kwargs["to_memo_key"], prefix=prefix)),
+                    ('sent_time', Uint64(int(kwargs["sent_time"]))),
+                    ('checksum', Uint32(int(kwargs["checksum"]))),
+                    ('message_size', Uint32(int(kwargs["message_size"]))),
+                    ('encrypted_message', String(kwargs["encrypted_message"])),
+                ]))            
+            
 
 def isArgsThisClass(self, args):
     return len(args) == 1 and type(args[0]).__name__ == type(self).__name__
