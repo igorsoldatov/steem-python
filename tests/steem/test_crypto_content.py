@@ -28,6 +28,9 @@ custom_instance = Steemd(nodes=steemd_nodes)
 pr = custom_instance.get_chain_properties()
 wallet_instance = Wallet(steemd_instance=custom_instance)
 
+priv1 = PrivateKey('5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM')
+priv2 = PrivateKey('5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq')
+
 
 def encrypt(priv, pub, nonce, message):
     shared_secret = get_shared_secret(priv, pub)
@@ -116,8 +119,6 @@ def unix_time_seconds(dt):
 
 def post_encrypted_content(owner, author, permlink, price, msg, enc_msg, order_id):
     nonce = unix_time_seconds(datetime.utcnow())
-    priv1 = PrivateKey('5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM')
-    priv2 = PrivateKey('5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq')
 
     if owner == '':
         cipher, check, msg_len = encrypt(priv1, priv1.pubkey, nonce, enc_msg)
@@ -201,18 +202,26 @@ def cancel_content_order(owner, order_id):
 def apply_content_order(author, order_id):
     order = custom_instance.get_content_order_by_id(order_id)
     comment = custom_instance.get_content(author, order['permlink'])
-    asdf = 1
+
+    created = datetime.strptime(comment['created'], '%Y-%m-%dT%H:%M:%S')
+    nonce = unix_time_seconds(created)
+    plaintext, check2 = decrypt(priv1, priv1.pubkey, nonce, comment['encrypted_body'])
+
+    post_encrypted_content(order['owner'], comment['author'], comment['permlink'], order['price'], comment['body'], plaintext, order['id'])
+
 
 def run():
     if 0:
         import_keys()
 
+    num = '006'
+
     author = 'user001'
     owner = 'user002'
-    permlink = 'crypto-post-python-004'
+    permlink = 'crypto-post-python-{}'.format(num)
     price = '10.000 BMT'
-    msg = 'Open message 004'
-    enc_msg = "Closed message from python script 004"
+    msg = 'Open message {}'.format(num)
+    enc_msg = "Closed message from python script {}".format(num)
 
     post_encrypted_content('', author, permlink, price, msg, enc_msg, 0)
 
