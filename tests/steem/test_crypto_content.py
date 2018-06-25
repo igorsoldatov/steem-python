@@ -214,7 +214,7 @@ def run():
     if 0:
         import_keys()
 
-    num = '006'
+    num = '008'
 
     author = 'user001'
     owner = 'user002'
@@ -239,6 +239,12 @@ def run():
         if ord['status'] == 'open':
             apply_content_order(ord['author'], ord['id'])
 
+    enc_comments = custom_instance.get_encrypted_discussions(owner, '', 100)
+    for enc_comment in enc_comments:
+        created = datetime.strptime(enc_comment['created'], '%Y-%m-%dT%H:%M:%S')
+        nonce = unix_time_seconds(created)
+        plaintext, check2 = decrypt(priv2, priv1.pubkey, nonce, comment['encrypted_body'])
+        print('message: {}'.replace(plaintext))
 
 if __name__ == '__main__':
     with suppress(KeyboardInterrupt):
