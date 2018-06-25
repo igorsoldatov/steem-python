@@ -1020,6 +1020,18 @@ class Steemd(HttpClient):
         return self.call(
             'get_key_references', public_keys, api='account_by_key_api')
 
+    def get_content_orders(self, owner, author, limit):
+        """ get_content_orders """
+        return self.call('get_content_orders', owner, author, limit, api='database_api')
+
+    def get_encrypted_discussions(self, owner, author, limit):
+        """ get_encrypted_discussions """
+        return self.call('get_encrypted_discussions', owner, author, limit, api='database_api')
+
+    def get_content_order_by_id(self, _id):
+        """ get_content_order_by_id """
+        return self.call('get_content_order_by_id', _id, api='database_api')
+
 
 if __name__ == '__main__':
     s = Steemd()

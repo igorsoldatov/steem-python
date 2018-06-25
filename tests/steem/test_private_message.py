@@ -4,7 +4,6 @@ from steem.instance import set_shared_steemd_instance
 
 from steem.transactionbuilder import TransactionBuilder
 from steembase import operations
-from steembase import memo as Memo
 from steembase.account import PrivateKey
 from steembase.memo import get_shared_secret, init_aes, _pad, _unpad
 from steem.utils import compat_bytes
@@ -13,8 +12,6 @@ from contextlib import suppress
 from binascii import hexlify, unhexlify
 from collections import OrderedDict
 from datetime import datetime
-from time import gmtime
-import calendar
 import json
 
 epoch = datetime.utcfromtimestamp(0)

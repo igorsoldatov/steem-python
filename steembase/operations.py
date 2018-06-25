@@ -17,6 +17,7 @@ asset_precision = {
     "STEEM": 3,
     "VESTS": 6,
     "SBD": 3,
+    "BMT": 3,
 }
 
 
@@ -759,6 +760,7 @@ class CommentOptions(GrapheneObject):
                     ('extensions', extensions),
                 ]))
 
+
 class PrivateMessage(GrapheneObject):
     def __init__(self, *args, **kwargs):
         if isArgsThisClass(self, args):
@@ -779,7 +781,66 @@ class PrivateMessage(GrapheneObject):
                     ('message_size', Uint32(int(kwargs["message_size"]))),
                     ('encrypted_message', String(kwargs["encrypted_message"])),
                 ]))            
-            
+
+
+class EncryptedContent(GrapheneObject):
+    def __init__(self, *args, **kwargs):
+        if isArgsThisClass(self, args):
+            self.data = args[0].data
+        else:
+            if len(args) == 1 and len(kwargs) == 0:
+                kwargs = args[0]
+            super(EncryptedContent, self).__init__(
+                OrderedDict([
+                    ('parent_author', String(kwargs["parent_author"])),
+                    ('parent_permlink', String(kwargs["parent_permlink"])),
+                    ('author', String(kwargs["author"])),
+                    ('permlink', String(kwargs["permlink"])),
+                    ('title', String(kwargs["title"])),
+                    ('body', String(kwargs["body"])),
+                    ('json_metadata', String(kwargs["json_metadata"])),
+                    ('encrypted_message', String(kwargs["encrypted_message"])),
+                    ('sent_time', Uint32(int(kwargs["sent_time"]))),
+                    ('message_size', Uint32(int(kwargs["message_size"]))),
+                    ('checksum', Uint32(int(kwargs["checksum"]))),
+                    ('price', Amount(kwargs["price"])),
+                    ('owner', String(kwargs["owner"])),
+                    ('order_id', Uint32(int(kwargs["order_id"]))),
+                    ('apply_order', Bool(bool(kwargs["apply_order"]))),
+                ]))
+
+
+class ContentOrderCreate(GrapheneObject):
+    def __init__(self, *args, **kwargs):
+        if isArgsThisClass(self, args):
+            self.data = args[0].data
+        else:
+            if len(args) == 1 and len(kwargs) == 0:
+                kwargs = args[0]
+            super(ContentOrderCreate, self).__init__(
+                OrderedDict([
+                    ('author', String(kwargs["author"])),
+                    ('permlink', String(kwargs["permlink"])),
+                    ('owner', String(kwargs["owner"])),
+                    ('price', Amount(kwargs["price"])),
+                    ('json_metadata', String(kwargs["json_metadata"])),
+                ]))
+
+
+class ContentOrderCancel(GrapheneObject):
+    def __init__(self, *args, **kwargs):
+        if isArgsThisClass(self, args):
+            self.data = args[0].data
+        else:
+            if len(args) == 1 and len(kwargs) == 0:
+                kwargs = args[0]
+            super(ContentOrderCancel, self).__init__(
+                OrderedDict([
+                    ('owner', String(kwargs["owner"])),
+                    ('order_id', Uint32(int(kwargs["order_id"]))),
+                    ('json_metadata', String(kwargs["json_metadata"])),
+                ]))
+
 
 def isArgsThisClass(self, args):
     return len(args) == 1 and type(args[0]).__name__ == type(self).__name__
