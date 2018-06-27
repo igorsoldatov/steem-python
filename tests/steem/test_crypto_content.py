@@ -18,18 +18,96 @@ import calendar
 import json
 
 epoch = datetime.utcfromtimestamp(0)
+mainnet = True
 
-steemd_nodes = [
-    'http://127.0.0.1:8765'
-    # 'http://91.134.171.33:8765'
-]
+if mainnet:
+    address = 'http://91.134.171.33:8765'
+else:
+    address = 'http://127.0.0.1:8765'
+steemd_nodes = [address]
 set_shared_steemd_instance(Steemd(nodes=steemd_nodes))
 custom_instance = Steemd(nodes=steemd_nodes)
 pr = custom_instance.get_chain_properties()
 wallet_instance = Wallet(steemd_instance=custom_instance)
 
-priv1 = PrivateKey('5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM')
-priv2 = PrivateKey('5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq')
+if mainnet:
+    priv1 = PrivateKey('5J2wPb6BVAyZZYpmJHRks1DgCLEHRmzAyrwzbsvX3xaHibH8XLM')
+    priv2 = PrivateKey('5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq')
+else:
+    priv1 = PrivateKey('5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM')
+    priv2 = PrivateKey('5KDkjj6MV2EsoabJqMqfVrXz2hnsmsPFyqiycyduy5ycKjNRYpD')
+
+
+def import_keys():
+    # Name account: user001
+    # Private owner key  : 5K4fYaZuuiGioP6tf8pqJPGzfuHa9hq9xW8WVSD4utMkooTZ3ZR
+    # Public owner key   : BMT54NcV9KJqUSo8CKNAEd7XS6vWnJCn5zJnDHA6YDhZpnVHEduKp
+    # Private active key : 5J6qAMLSqfyN1VLKZ7memQA3KDHEbnpHbYUcWKA21oLtwMPwWoU
+    # Public active key  : BMT8BRg9kH2rX7bkbkpDqUtF5skZ3xcpoLwJCYGUvVP4j9vkQGG2e
+    # Private posting key: 5JX8xFWtm94HP1soVoDSC7YR6mnef4P54qbAez539gKyXzsHmd8
+    # Public posting key : BMT7P3FmGtRkT8S1GjSv45CQ8tbPX11i3BZk2vGoSTqWPJG72XWS4
+    # Private memo key   : 5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM
+    # Public memo key    : BMT5B7NTVNQtQqhpK735amAWoYt15PJsHPPxDKPQobahttU6xKdEK
+
+    # Name account: user002
+    # Private owner key  : 5Jx32tTf6iTB9nrT8RWdT9rRSfSw6V7ygEZWEb8HjQ9gQnkj3Lz
+    # Public owner key   : BMT83GTCtrKcU4ZiWJveSicvYEFsV3HqbEkLZrBnG6P6spJxHRR3N
+    # Private active key : 5HzHCAQHM7fGzEjaaXLZbPKpVNTRpUqGcEboVbbdmSzribhrzRA
+    # Public active key  : BMT8RtrrSTW1xvFMJfMnF6WimrwZsHVgDM8XnQa1vBkcW6zQKU8xn
+    # Private posting key: 5KYsXypMYYYVrrDW38VrKZcFDNYcRyo3vHiBFSwPkSPfrc8PD1J
+    # Public posting key : BMT8LodLQLNNXx6x7zpDpfgeqKhJDGq21Pt16mXLnd1QdxdAReUuA
+    # Private memo key   : 5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq
+    # Public memo key    : BMT869dJrWzZXmwM439cfLqabZjB3mF5c7Vi6qQPfqE6tc5cHzgtu
+
+    try:
+        # user001
+        wallet_instance.addPrivateKey(wif='5K4fYaZuuiGioP6tf8pqJPGzfuHa9hq9xW8WVSD4utMkooTZ3ZR')
+        wallet_instance.addPrivateKey(wif='5J6qAMLSqfyN1VLKZ7memQA3KDHEbnpHbYUcWKA21oLtwMPwWoU')
+        wallet_instance.addPrivateKey(wif='5JX8xFWtm94HP1soVoDSC7YR6mnef4P54qbAez539gKyXzsHmd8')
+        wallet_instance.addPrivateKey(wif='5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM')
+        # user002
+        wallet_instance.addPrivateKey(wif='5Jx32tTf6iTB9nrT8RWdT9rRSfSw6V7ygEZWEb8HjQ9gQnkj3Lz')
+        wallet_instance.addPrivateKey(wif='5HzHCAQHM7fGzEjaaXLZbPKpVNTRpUqGcEboVbbdmSzribhrzRA')
+        wallet_instance.addPrivateKey(wif='5KYsXypMYYYVrrDW38VrKZcFDNYcRyo3vHiBFSwPkSPfrc8PD1J')
+        wallet_instance.addPrivateKey(wif='5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq')
+    except ValueError:
+        donothing = True
+
+
+def import_keys_mainnet():
+    # Name account: user001
+    # Public ownerkey    : BMT5uoRoGVGyuVNbY43TkH9WBU2QEiTjHQv28pMHXnZ7G7nLneKbA
+    # Private owner key  : 5JnWUyuk9jT3nW7x2pwFkz7qVLV7pgpKAXnM8dXAShwZqcXCYee
+    # Public active key  : BMT8eBDBAoGhPJotea3xMumpxeD7KZ3JQHK3Nu3oB9rd6hm7D7yoG
+    # Private active key : 5JxeAeCgHhxnTXYux5FsXZWq84VmxYhJZdouZ8bXAkcjrzPVoj8
+    # Public posting key : BMT7rLYKSpuoukZ5iTraidz432uRFrGLunKP1Zy3v3cLjiGjfJPrN
+    # Private posting key: 5J2srqnG4cKyRdqKPZ9bwmytPmudpQthF96BUA9Sek3cseZjrPR
+    # Public memo key    : BMT7o4Az56RoUhLay68NaUFh56sgCjStvEBt7kGzVGBqPuuQjgbpr
+    # Private memo key   : 5J2wPb6BVAyZZYpmJHRks1DgCLEHRmzAyrwzbsvX3xaHibH8XLM
+    #
+    # Name account: user002
+    # Public owner key   : BMT6QnUbX5e1Fo9J8tD6Gz1ygkttEjvYCoDHGZPFkN9SqWjPuNg3L
+    # Private owner key  : 5JU8abbTWxEiwakSWUNvfebuLuTb75Dz8jBG5bZ73M2kcyhYaav
+    # Public active key  : BMT6qSVaREQzPteRvjScAcdVaR72NMvZoT48Lz1WU8zP6wGpF9jAd
+    # Private active key : 5KfvQrWFMifCKqPkDBaagkxK8J2JoSaPeZoKs93rrTmKgbYEh9P
+    # Public posting key : BMT8LiPDB2YEwFR7DRkgdTHb1NfX96dPFPoiTgQrFnukaXmAQkKdH
+    # Private posting key: 5Jdhhq9MJCK6NN5TtUZXjtX7QXaJvvL29JBaJu6PKDGvJeB6rnr
+    # Public memo key    : BMT58GceeEnG9TRDHjGcnTY3sWfPtwKEdD6kemCyuTihfsma7Db9d
+    # Private memo key   : 5KDkjj6MV2EsoabJqMqfVrXz2hnsmsPFyqiycyduy5ycKjNRYpD
+
+    try:
+        # user001
+        wallet_instance.addPrivateKey(wif='5JnWUyuk9jT3nW7x2pwFkz7qVLV7pgpKAXnM8dXAShwZqcXCYee')
+        wallet_instance.addPrivateKey(wif='5JxeAeCgHhxnTXYux5FsXZWq84VmxYhJZdouZ8bXAkcjrzPVoj8')
+        wallet_instance.addPrivateKey(wif='5J2srqnG4cKyRdqKPZ9bwmytPmudpQthF96BUA9Sek3cseZjrPR')
+        wallet_instance.addPrivateKey(wif='5J2wPb6BVAyZZYpmJHRks1DgCLEHRmzAyrwzbsvX3xaHibH8XLM')
+        # user002
+        wallet_instance.addPrivateKey(wif='5JU8abbTWxEiwakSWUNvfebuLuTb75Dz8jBG5bZ73M2kcyhYaav')
+        wallet_instance.addPrivateKey(wif='5KfvQrWFMifCKqPkDBaagkxK8J2JoSaPeZoKs93rrTmKgbYEh9P')
+        wallet_instance.addPrivateKey(wif='5Jdhhq9MJCK6NN5TtUZXjtX7QXaJvvL29JBaJu6PKDGvJeB6rnr')
+        wallet_instance.addPrivateKey(wif='5KDkjj6MV2EsoabJqMqfVrXz2hnsmsPFyqiycyduy5ycKjNRYpD')
+    except ValueError:
+        donothing = True
 
 
 def encrypt(priv, pub, nonce, message):
@@ -74,39 +152,6 @@ def comment():
     tx = tb.broadcast()
 
     print(tx)
-
-
-def import_keys():
-    # Name account: user001
-    # Private owner key  : 5K4fYaZuuiGioP6tf8pqJPGzfuHa9hq9xW8WVSD4utMkooTZ3ZR
-    # Public owner key   : BMT54NcV9KJqUSo8CKNAEd7XS6vWnJCn5zJnDHA6YDhZpnVHEduKp
-    # Private active key : 5J6qAMLSqfyN1VLKZ7memQA3KDHEbnpHbYUcWKA21oLtwMPwWoU
-    # Public active key  : BMT8BRg9kH2rX7bkbkpDqUtF5skZ3xcpoLwJCYGUvVP4j9vkQGG2e
-    # Private posting key: 5JX8xFWtm94HP1soVoDSC7YR6mnef4P54qbAez539gKyXzsHmd8
-    # Public posting key : BMT7P3FmGtRkT8S1GjSv45CQ8tbPX11i3BZk2vGoSTqWPJG72XWS4
-    # Private memo key   : 5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM
-    # Public memo key    : BMT5B7NTVNQtQqhpK735amAWoYt15PJsHPPxDKPQobahttU6xKdEK
-
-    # Name account: user002
-    # Private owner key  : 5Jx32tTf6iTB9nrT8RWdT9rRSfSw6V7ygEZWEb8HjQ9gQnkj3Lz
-    # Public owner key   : BMT83GTCtrKcU4ZiWJveSicvYEFsV3HqbEkLZrBnG6P6spJxHRR3N
-    # Private active key : 5HzHCAQHM7fGzEjaaXLZbPKpVNTRpUqGcEboVbbdmSzribhrzRA
-    # Public active key  : BMT8RtrrSTW1xvFMJfMnF6WimrwZsHVgDM8XnQa1vBkcW6zQKU8xn
-    # Private posting key: 5KYsXypMYYYVrrDW38VrKZcFDNYcRyo3vHiBFSwPkSPfrc8PD1J
-    # Public posting key : BMT8LodLQLNNXx6x7zpDpfgeqKhJDGq21Pt16mXLnd1QdxdAReUuA
-    # Private memo key   : 5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq
-    # Public memo key    : BMT869dJrWzZXmwM439cfLqabZjB3mF5c7Vi6qQPfqE6tc5cHzgtu
-
-    # user001
-    wallet_instance.addPrivateKey(wif='5K4fYaZuuiGioP6tf8pqJPGzfuHa9hq9xW8WVSD4utMkooTZ3ZR')
-    wallet_instance.addPrivateKey(wif='5J6qAMLSqfyN1VLKZ7memQA3KDHEbnpHbYUcWKA21oLtwMPwWoU')
-    wallet_instance.addPrivateKey(wif='5JX8xFWtm94HP1soVoDSC7YR6mnef4P54qbAez539gKyXzsHmd8')
-    wallet_instance.addPrivateKey(wif='5KN6RkfuuQmZFBAwRe8TXqfrdLmydtUK1mV2gwbauhSaqewCvTM')
-    # user002
-    wallet_instance.addPrivateKey(wif='5Jx32tTf6iTB9nrT8RWdT9rRSfSw6V7ygEZWEb8HjQ9gQnkj3Lz')
-    wallet_instance.addPrivateKey(wif='5HzHCAQHM7fGzEjaaXLZbPKpVNTRpUqGcEboVbbdmSzribhrzRA')
-    wallet_instance.addPrivateKey(wif='5KYsXypMYYYVrrDW38VrKZcFDNYcRyo3vHiBFSwPkSPfrc8PD1J')
-    wallet_instance.addPrivateKey(wif='5Hw9Hpts79c7JaKfXEK2auRsuw2VNceVXubNsugYM3ax93zZcRq')
 
 
 def unix_time_millis(dt):
@@ -211,10 +256,13 @@ def apply_content_order(author, order_id):
 
 
 def run():
-    if 0:
-        import_keys()
+    if 1:
+        if mainnet:
+            import_keys_mainnet()
+        else:
+            import_keys()
 
-    num = '008'
+    num = '002'
 
     author = 'user001'
     owner = 'user002'
@@ -245,6 +293,7 @@ def run():
         nonce = unix_time_seconds(created)
         plaintext, check2 = decrypt(priv2, priv1.pubkey, nonce, comment['encrypted_body'])
         print('message: {}'.replace(plaintext))
+
 
 if __name__ == '__main__':
     with suppress(KeyboardInterrupt):
