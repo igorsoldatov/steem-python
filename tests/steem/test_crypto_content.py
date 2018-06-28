@@ -18,7 +18,7 @@ import calendar
 import json
 
 epoch = datetime.utcfromtimestamp(0)
-mainnet = True
+mainnet = False
 
 if mainnet:
     address = 'http://91.134.171.33:8765'
@@ -169,10 +169,12 @@ def post_encrypted_content(owner, author, permlink, price, msg, enc_msg, order_i
         cipher, check, msg_len = encrypt(priv1, priv1.pubkey, nonce, enc_msg)
         plaintext, check2 = decrypt(priv1, priv1.pubkey, nonce, cipher)
         apply_order = False
+        new_permlink = permlink
     else:
         cipher, check, msg_len = encrypt(priv2, priv1.pubkey, nonce, enc_msg)
         plaintext, check2 = decrypt(priv2, priv1.pubkey, nonce, cipher)
         apply_order = True
+        new_permlink = permlink + '-' + str(nonce)
 
     if check != check2:
         return
@@ -182,8 +184,8 @@ def post_encrypted_content(owner, author, permlink, price, msg, enc_msg, order_i
             'parent_author': '',
             'parent_permlink': 'category',
             'author': author,
-            'permlink': permlink,
-            'title': permlink,
+            'permlink': new_permlink,
+            'title': new_permlink,
             'body': msg,
             'json_metadata': '',
             'encrypted_message': cipher,
@@ -262,7 +264,7 @@ def run():
         else:
             import_keys()
 
-    num = '002'
+    num = '005'
 
     author = 'user001'
     owner = 'user002'
