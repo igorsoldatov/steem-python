@@ -154,6 +154,113 @@ def comment():
     print(tx)
 
 
+def create_account(new_account_name):
+    key1 = PrivateKey()
+    key2 = PrivateKey()
+    key3 = PrivateKey()
+    key4 = PrivateKey()
+    messages = [
+        {
+            'fee': '10.000 BMT',
+            'creator': 'initminer',
+            'new_account_name': new_account_name,
+            'json_metadata': '',
+            'memo_key': str(key4.pubkey),
+            'owner': {
+                'account_auths': [],
+                'key_auths': [[str(key1.pubkey), 1]],
+                'weight_threshold': 1
+            },
+            'active': {
+                'account_auths': [],
+                'key_auths': [[str(key2.pubkey), 1]],
+                'weight_threshold': 1
+            },
+            'posting': {
+                'account_auths': [],
+                'key_auths': [[str(key3.pubkey), 1]],
+                'weight_threshold': 1
+            }
+        }]
+
+    tb = TransactionBuilder(no_broadcast=False, steemd_instance=custom_instance, wallet_instance=wallet_instance)
+    ops = [operations.AccountCreate(**x) for x in messages]
+    tb.appendOps(ops)
+    tb.appendSigner('initminer', 'posting')
+    tb.sign()
+    tx = tb.broadcast()
+
+    wallet_instance.addPrivateKey(wif=str(key1))
+    wallet_instance.addPrivateKey(wif=str(key2))
+    wallet_instance.addPrivateKey(wif=str(key3))
+    wallet_instance.addPrivateKey(wif=str(key4))
+
+    print(tx)
+
+
+def comment(author, permlink, body):
+    messages = [
+        {
+            'parent_author': '',
+            'parent_permlink': 'category001',
+            'author': author,
+            'permlink': permlink,
+            'title': permlink,
+            'body': body,
+            'json_metadata': '{"tags":["tag000"],"app":"steemit/0.1","format":"markdown"}'
+        }]
+
+    tb = TransactionBuilder(no_broadcast=False, steemd_instance=custom_instance, wallet_instance=wallet_instance)
+    ops = [operations.Comment(**x) for x in messages]
+    tb.appendOps(ops)
+    tb.appendSigner(author, 'posting')
+    tb.sign()
+    tx = tb.broadcast()
+
+    print(tx)
+
+
+def vote(voter, author, permlink, weight):
+    messages = [
+        {
+            'voter': voter,
+            'author': author,
+            'permlink': permlink,
+            'weight': weight,
+            'comment_bmchain': ''
+        }]
+
+    tb = TransactionBuilder(no_broadcast=False, steemd_instance=custom_instance, wallet_instance=wallet_instance)
+    ops = [operations.Vote(**x) for x in messages]
+    tb.appendOps(ops)
+    tb.appendSigner(voter, 'posting')
+    tb.sign()
+    try:
+        tx = tb.broadcast()
+        print(tx)
+    except ValueError:
+        print("Can't vote")
+
+
+def transfer(_from, _to, amount):
+    messages = [
+        {
+            'from': _from,
+            'to': _to,
+            'amount': amount,
+            'memo': ''
+        }]
+
+    tb = TransactionBuilder(no_broadcast=False, steemd_instance=custom_instance, wallet_instance=wallet_instance)
+    ops = [operations.Transfer(**x) for x in messages]
+    tb.appendOps(ops)
+    tb.appendSigner(_from, 'posting')
+    tb.sign()
+    tx = tb.broadcast()
+
+    print(tx)
+
+
 def unix_time_millis(dt):
     return int((dt - epoch).total_seconds() * 1000000)
 
@@ -264,7 +371,17 @@ def run():
         else:
             import_keys()
 
-    num = '005'
+    acc = custom_instance.get_account('user001')
+    if acc is None:
+        create_account('user001')
+        transfer('initminer', 'user001', '1000.000 BMT')
+
+    acc = custom_instance.get_account('user002')
+    if acc is None:
+        create_account('user002')
+        transfer('initminer', 'user002', '1000.000 BMT')
+
+    num = '001'
 
     author = 'user001'
     owner = 'user002'
@@ -289,12 +406,28 @@ def run():
         if ord['status'] == 'open':
             apply_content_order(ord['author'], ord['id'])
 
-    enc_comments = custom_instance.get_encrypted_discussions(owner, '', 100)
+    enc_comments = custom_instance.get_encrypted_discussions({'owner': owner, 'limit': 100})
     for enc_comment in enc_comments:
         created = datetime.strptime(enc_comment['created'], '%Y-%m-%dT%H:%M:%S')
         nonce = unix_time_seconds(created)
         plaintext, check2 = decrypt(priv2, priv1.pubkey, nonce, comment['encrypted_body'])
         print('message: {}'.replace(plaintext))
+
+
+def main():
+    num = '001'
+    author = 'user001'
+    owner = 'user002'
+    permlink = 'crypto-post-python-{}'.format(num)
+    price = '10.000 BMT'
+    msg = 'Open message {}'.format(num)
+    enc_msg = "Closed message from python script {}".format(num)
+
+    create_account(author)
+    create_account(owner)
+    transfer('initminer', author, '1000.000 BMT')
+    transfer('initminer', owner, '1000.000 BMT')
+    post_encrypted_content('', author, permlink, price, msg, enc_msg, 0)
 
 
 if __name__ == '__main__':
